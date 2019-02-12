@@ -24,9 +24,12 @@ class CStoch
       void Fill();
       bool IsUp();
       bool IsDown();
-      double HighValue(int counts); 
-      double LowValue(int counts);
-      double Distance(int counts);
+      double HighValue(int beginIndex, int counts); 
+      double LowValue(int beginIndex, int counts);
+      double Distance(int beginIndex, int counts);
+      
+      int HighIndex(int beginIndex, int counts); 
+      int LowIndex(int beginIndex, int counts);
 };
 
 void CStoch::Fill()
@@ -52,10 +55,11 @@ bool CStoch::IsDown()
    return false;
 }
 
-double CStoch::HighValue(int counts)
+double CStoch::HighValue(int beginIndex, int counts)
 {
    double h = -1;
-   for(int i=1;i<counts;i++){ 
+   int limit = beginIndex+counts;
+   for(int i=beginIndex;i<limit;i++){ 
       if(data[i] > h){
          h = data[i];
       }
@@ -63,10 +67,11 @@ double CStoch::HighValue(int counts)
    return h;
 }
 
-double CStoch::LowValue(int counts)
+double CStoch::LowValue(int beginIndex, int counts)
 {
    double l = 9999999;
-   for(int i=1;i<counts;i++){ 
+   int limit = beginIndex+counts;
+   for(int i=beginIndex;i<limit;i++){ 
       if(data[i] < l){
          l = data[i];
       }
@@ -74,9 +79,37 @@ double CStoch::LowValue(int counts)
    return l;
 }
 
-double CStoch::Distance(int counts)
+double CStoch::Distance(int beginIndex, int counts)
 {
-   double h = this.HighValue(counts);
-   double l = this.LowValue(counts);
+   double h = this.HighValue(beginIndex, counts);
+   double l = this.LowValue(beginIndex, counts);
    return h - l;
+}
+
+int CStoch::HighIndex(int beginIndex, int counts)
+{
+   double h = -1;
+   int idx = beginIndex;
+   int limit = beginIndex+counts;
+   for(int i=beginIndex;i<limit;i++){ 
+      if(data[i] > h){
+         h = data[i];
+         idx = i;
+      }
+   }
+   return idx;
+}
+
+int CStoch::LowIndex(int beginIndex, int counts)
+{
+   double l = 9999999;
+   int idx = beginIndex;
+   int limit = beginIndex+counts;
+   for(int i=beginIndex;i<limit;i++){ 
+      if(data[i] < l){
+         l = data[i];
+         idx = i;
+      }
+   }
+   return idx;
 }
