@@ -8,15 +8,15 @@
 #property version   "6.0"
 #property strict
 
-#include "CStrategySmOne.mqh";
+#include "CStrategy.mqh";
  
 extern int       SmOne_MagicNumber  = 20190211;    
 extern double    SmOne_Lots         = 0.1;
-extern int       SmOne_intTP        = 12;
-extern int       SmOne_intSL        = 12;
+extern int       SmOne_intTP        = 6;
+extern int       SmOne_intSL        = 0;
       
 
-CStrategySmOne* oCStrategySmOne;
+CStrategy* oCStrategy;
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -25,10 +25,10 @@ int OnInit()
 {
 //---
    Print("begin");
-   if(oCStrategySmOne == NULL){
-      oCStrategySmOne = new CStrategySmOne(SmOne_MagicNumber);
+   if(oCStrategy == NULL){
+      oCStrategy = new CStrategy(SmOne_MagicNumber);
    }
-   oCStrategySmOne.Init(SmOne_Lots,SmOne_intTP,SmOne_intSL);
+   oCStrategy.Init(SmOne_Lots,SmOne_intTP,SmOne_intSL);
    
 //---
    return(INIT_SUCCEEDED);
@@ -47,7 +47,7 @@ void OnDeinit(const int reason)
 
 void OnTick()
 {
-   oCStrategySmOne.Tick();
+   oCStrategy.Tick();
 }
 
 
