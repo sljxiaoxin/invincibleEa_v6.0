@@ -13,7 +13,7 @@
 extern int       SmOne_MagicNumber  = 20190211;    
 extern double    SmOne_Lots         = 0.1;
 extern int       SmOne_intTP        = 6;
-extern int       SmOne_intSL        = 0;
+extern int       SmOne_intSL        = 30;
       
 
 CStrategy* oCStrategy;
