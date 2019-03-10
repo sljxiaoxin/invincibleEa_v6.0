@@ -48,6 +48,7 @@ void OnDeinit(const int reason)
 void OnTick()
 {
    oCStrategy.Tick();
+   subPrintDetails();
 }
 
 
@@ -59,7 +60,7 @@ void subPrintDetails()
    string NL         = "\n";
 
    sComment = sp;
-   //sComment = sComment + "TotalItems = " + oCOrder.TotalItems() + NL; 
+   sComment = sComment + "Trend = " + oCStrategy.getTrend() + NL; 
    sComment = sComment + sp;
    //sComment = sComment + "TotalItemsActive = " + oCOrder.TotalItemsActive() + NL; 
    sComment = sComment + sp;
